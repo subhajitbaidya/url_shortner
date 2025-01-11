@@ -4,6 +4,8 @@ const staticRoute = require("./routes/staticRouter");
 const userRoute = require("./routes/user");
 const path = require("path");
 const { connectToMongoDB } = require("./connect");
+// const cookieParser = require("cookie-parser");
+const {restrictToLoggedinUsersOnly} = require('./middleware/auth')
 
 const app = express();
 const PORT = 3000;
@@ -18,8 +20,9 @@ app.set("views", path.resolve("./views"));
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// app.use(cookieParser);
 
-app.use("/url", urlRoute);
+app.use("/url",restrictToLoggedinUsersOnly, urlRoute);
 app.use("/user", userRoute);
 app.use("/", staticRoute);
 
