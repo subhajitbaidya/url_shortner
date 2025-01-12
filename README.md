@@ -65,4 +65,4 @@ Experiment
 
 **How will you validate the solution is working correctly?**
 
-We will do API testing, UI testing and Feature testing.
+We will do API testing with PostMan, UI testing in browser and Feature testing of generated short ids and redirect urls.
