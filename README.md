@@ -55,7 +55,7 @@ Authentication system vulnerabilities.
 
 # Implementation and rollout plan
 
-Targeting completion by end of next Saturday. 
+Targeting completion by end of 18th January 2025. 
 
 **Is this project in an experiment or feature flagged?**
 
