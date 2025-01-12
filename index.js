@@ -5,7 +5,7 @@ const userRoute = require("./routes/user");
 const path = require("path");
 const { connectToMongoDB } = require("./connect");
 const cookieParser = require("cookie-parser");
-const { restrictToLoggedinUsersOnly } = require("./middleware/auth");
+const { restrictToLoggedinUsersOnly, checkAuth } = require("./middleware/auth");
 
 const app = express();
 const PORT = 3000;
@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 app.use("/url", restrictToLoggedinUsersOnly, urlRoute);
 app.use("/user", userRoute);
-app.use("/", staticRoute);
+app.use("/", checkAuth, staticRoute);
 
 app.listen(PORT, () => {
   console.log(`Server started on PORT ${PORT}`);
