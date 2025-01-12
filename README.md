@@ -5,7 +5,7 @@
 ## Goals
 
 ```markdown
- POST/URL - Generates a new short URL and returns the shortened URL in the format example.com/random-id  
+        POST/URL - Generates a new short URL and returns the shortened URL in the format example.com/random-id  
           
         GET/:id - Redirects the user to the original URL
 
