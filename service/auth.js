@@ -15,9 +15,9 @@ function setUser(user) {
 function getUser(token) {
   if (!token) return null;
   try {
-    return jwt.verify(token, secret);      
+    return jwt.verify(token, secret);
   } catch (error) {
-    return null;
+    throw new Error("Token not verified!");
   }
 }
 

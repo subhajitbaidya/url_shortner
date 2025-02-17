@@ -1,14 +1,22 @@
 const URL = require("../models/url");
 
-// To handle ejs UI coming from views
-async function handleUserInterface(req, res) {
-  if (!req.user) return res.redirect("login");
-  const allUrls = await URL.find({createdBy: req.user._id});
+async function handleHomeUI(req, res) {
+  const allUrls = await URL.find({ createdBy: req.user._id });
   return res.render("home", {
     urls: allUrls,
   });
 }
 
+function handleLoginUI(req, res) {
+  return res.render("login");
+}
+
+function handleSignupUI(req, res) {
+  return res.render("signup");
+}
+
 module.exports = {
-  handleUserInterface,
+  handleHomeUI,
+  handleLoginUI,
+  handleSignupUI,
 };

@@ -5,9 +5,8 @@ const userRoute = require("./routes/user");
 const path = require("path");
 const { connectToMongoDB } = require("./connect");
 const cookieParser = require("cookie-parser");
-const { restrictToLoggedinUsersOnly, checkAuth } = require("./middleware/auth");
-require('dotenv').config();
-
+const { checkForAuthentication, restrictTo } = require("./middleware/auth");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,10 +22,11 @@ app.set("views", path.resolve("./views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(checkForAuthentication);
 
-app.use("/url", restrictToLoggedinUsersOnly, urlRoute);
+app.use("/url", restrictTo(["NORMAL"]), urlRoute);
 app.use("/user", userRoute);
-app.use("/", checkAuth, staticRoute);
+app.use("/", staticRoute);
 
 app.listen(PORT, () => {
   console.log(`Server started on PORT ${PORT}`);
