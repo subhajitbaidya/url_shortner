@@ -6,9 +6,11 @@ const path = require("path");
 const { connectToMongoDB } = require("./connect");
 const cookieParser = require("cookie-parser");
 const { restrictToLoggedinUsersOnly, checkAuth } = require("./middleware/auth");
+require('dotenv').config();
+
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 connectToMongoDB("mongodb://127.0.0.1:27017/short-url").then(() =>
   console.log("Mongodb connected!")
@@ -19,7 +21,7 @@ app.set("views", path.resolve("./views"));
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: false })); 
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/url", restrictToLoggedinUsersOnly, urlRoute);
