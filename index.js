@@ -17,6 +17,7 @@ connectToMongoDB("mongodb://127.0.0.1:27017/short-url").then(() =>
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware
 app.use(express.json());
